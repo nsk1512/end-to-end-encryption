@@ -19,6 +19,8 @@ sending.
 ● It also generates a new RSA512 keypair for every client which is used to
 identify him, this is useful for verification purposes as it prevents anyone else
 from pretending he's someone else.
+<br>
 ● The server is by default set to use localhost (127.0.0.1) IP address.
+<br>
 ● If you want to use other IP (to connect outside your local machine), you need to
 change IP in config.conf file.

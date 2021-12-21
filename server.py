@@ -6,27 +6,32 @@ from time import gmtime, strftime
 import sys
 import rsa
 def get_config(config_file, category, value):
-# SETUP CONFIGPARSER
-DIR = os.path.dirname(os.path.realpath(__file__))
-conf_file = os.path.join(DIR, config_file)
-config = configparser.ConfigParser()
-config.read(conf_file)
+	# SETUP CONFIGPARSER
+	DIR = os.path.dirname(os.path.realpath(__file__))
+	conf_file = os.path.join(DIR, config_file)
+	config = configparser.ConfigParser()
+	config.read(conf_file)
 return config.get(category, value)
+
 def init_msg(ip, port):
-print('Server running')
-print(f'IP: {ip}:{port}\n')
+	print('Server running')
+	print(f'IP: {ip}:{port}\n')
+	
 def log(msg):
-time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-print(f'[{time}]: {msg}')
+	time = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+	print(f'[{time}]: {msg}')
+	
 def get_header(message):
-return f'{len(message):<{HEADER_LENGTH}}'.encode('utf-8')
+	return f'{len(message):<{HEADER_LENGTH}}'.encode('utf-8')
+
 def receive_message(client_socket):
-try:
-# Receive header
-message_header = client_socket.recv(HEADER_LENGTH)
-# If no data was received, client closed the connection
-if not len(message_header):
-return False
+	try:
+		# Receive header
+		message_header = client_socket.recv(HEADER_LENGTH)
+		# If no data was received, client closed the connection
+	if not len(message_header):
+		return False
+
 # Get message length from the received header
 message_length = int(message_header.decode('utf-8').strip())
 return {'header': message_header, 'data':
